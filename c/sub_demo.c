@@ -1,9 +1,7 @@
 /* 
  * MQTT client example in C using libmosquitto (
- * how to compile:
- * - install libmosquitto
- * - compile with: 
- *      gcc sub_demo.c -Wall -pedantic -lmosquitto -o sub_demo
+ *
+ * for how to run instructions see howto.md
  */
  
 /* adapted from mosquitto_sub in libmosquitto: 

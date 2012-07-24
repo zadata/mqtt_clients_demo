@@ -1,6 +1,8 @@
 /*
  * Demo MQTT C++ Client using libmosquittopp
  *
+ * for how to run instructions see howto.md
+ *
  * copyright 2012 Nivertech (Nywhere Tech Ltd)
  */
 
