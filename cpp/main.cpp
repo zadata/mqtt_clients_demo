@@ -27,9 +27,9 @@ int main() {
             std::cerr << "mosq_err" << " " << rc << "\n";
         return rc;
     }
-	do {
-	    rc = client.loop(-1);
-	} while(rc == MOSQ_ERR_SUCCESS);
+    do {
+        rc = client.loop(-1);
+    } while(rc == MOSQ_ERR_SUCCESS);
 
     client.disconnect();
     client.lib_cleanup();

@@ -23,25 +23,25 @@ void Client::on_connect(int rc) {
             subscribe(NULL, Constants::topics[i], 0);
         }
     } else {
-   		switch(rc) {
-			case 1:
-				std::cerr << "Connection Refused: unacceptable protocol version\n";
-				break;
-			case 2:
-				std::cerr << "Connection Refused: identifier rejected\n";
-				break;
-			case 3:
-				std::cerr << "Connection Refused: broker unavailable\n";
-				break;
-			case 4:
-				std::cerr << "Connection Refused: bad user name or password\n";
-				break;
-			case 5:
-				std::cerr << "Connection Refused: not authorised\n";
-				break;
-			default:
-				std::cerr << "Connection Refused: unknown reason\n";
-				break;
+        switch(rc) {
+            case 1:
+                std::cerr << "Connection Refused: unacceptable protocol version\n";
+                break;
+            case 2:
+                std::cerr << "Connection Refused: identifier rejected\n";
+                break;
+            case 3:
+                std::cerr << "Connection Refused: broker unavailable\n";
+                break;
+            case 4:
+                std::cerr << "Connection Refused: bad user name or password\n";
+                break;
+            case 5:
+                std::cerr << "Connection Refused: not authorised\n";
+                break;
+            default:
+                std::cerr << "Connection Refused: unknown reason\n";
+                break;
         }
     }
 }
