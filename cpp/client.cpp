@@ -12,6 +12,7 @@
 #include <sstream>
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
 Client::Client() : mosquittopp(generate_id()) { }
 
@@ -23,6 +24,17 @@ void Client::on_connect(int rc) {
         for (int i = 0; i < Constants::topic_count; ++i) {
             std::cerr << "Subscribing to " << Constants::topics[i] << "\n";
             subscribe(NULL, Constants::topics[i], 0);
+        }
+        time_t rawtime;
+        time(&rawtime);
+        std::stringstream strm;
+        strm << "Hello world from C++ demo at " << ctime(&rawtime);
+        std::string str = strm.str();
+        rc = publish(NULL, Constants::publish_topic, str.size(), (const uint8_t*)(str.c_str()), 0, 1);
+        if (rc) {
+            std::cerr << "Error: publish returned " << rc << ", disconnecting.\n";
+            disconnect();
+            exit(rc);
         }
     } else {
         switch(rc) {

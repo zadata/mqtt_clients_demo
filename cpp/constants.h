@@ -21,5 +21,6 @@ public:
     const static int   keepalive_secs; // keepalive ping interval in seconds
     const static char *topics[];       // topics to subscribe to
     const static int   topic_count;    // number of topics in topics array
+    const static char *publish_topic;  // topic to publish hello message to
 };
 #endif//MQTTCPP_CONSTANTS_H

@@ -14,6 +14,8 @@ const char *Constants::password       = "YOUR-MQTT-SUBSCRIBER-PWD";
 const char *Constants::host           = "mqtt.zadata.com";
 const int   Constants::port           = 1883;
 const int   Constants::keepalive_secs = 30;
-const char *Constants::topics[] = {"/quotes_sim/data/exchange/NYSE/ticker/SPY/price",
-                                   "/quotes_sim/data/exchange/NYSE/ticker/HPQ/price"};
-const int   Constants::topic_count = (sizeof(Constants::topics) / sizeof(char*));
+const char *Constants::topics[]       = {"/quotes_sim/data/exchange/NYSE/ticker/SPY/price",
+                                         "/quotes_sim/data/exchange/NYSE/ticker/HPQ/price",
+                                         "hello_topic"};
+const int   Constants::topic_count    = (sizeof(Constants::topics) / sizeof(char*));
+const char *Constants::publish_topic  = "hello_topic"; 
