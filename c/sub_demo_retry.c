@@ -70,6 +70,7 @@ char *TOPICS[] = {"/quotes_sim/data/exchange/NYSE/ticker/SPY/price",
 
 bool force_retry = false;
 
+// see http://googleappsdeveloper.blogspot.co.il/2011/12/documents-list-api-best-practices.html
 #define BACKOFF_RESET_IN_SECS 60      // after this amount of time passes successfuly between backoffs, backoff is reset
 #define BACKOFF_LIMIT_IN_SECS 60      // maximal backoff delay
 #define BACKOFF_INITIAL_IN_SECS 1     // initial backoff delay 
