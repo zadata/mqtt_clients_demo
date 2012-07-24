@@ -67,7 +67,13 @@ void connect_callback(void *obj, int result) {
         fprintf(stderr, "Connected successfuly to %s:%d\n", HOST, PORT);
         for (i = 0; i < TOPIC_COUNT; ++i) {
             fprintf(stderr, "Subscribing to %s\n", TOPICS[i]);
-            mosquitto_subscribe(mosq, NULL, TOPICS[i], 0);
+            rc = mosquitto_subscribe(mosq, NULL, TOPICS[i], 0);
+            if (rc) {
+                fprintf(stderr, "Error: failed to subscribe to %s, subscribe returned %d\n",
+                        TOPICS[i], rc);
+                mosquitto_disconnect(mosq);
+                return;
+            }
         }
         time(&rawtime);
         sprintf(buf, "Hello world from C demo at %s", ctime(&rawtime));
