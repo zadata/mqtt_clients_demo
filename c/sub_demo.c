@@ -69,7 +69,7 @@ void connect_callback(void *obj, int result) {
             fprintf(stderr, "Subscribing to %s\n", TOPICS[i]);
             mosquitto_subscribe(mosq, NULL, TOPICS[i], 0);
         }
-        ctime(&rawtime);
+        time(&rawtime);
         sprintf(buf, "Hello world from C demo at %s", ctime(&rawtime));
         fprintf(stderr, "Publishing to %s - %s\n", PUBLISH_TOPIC, buf);
         rc = mosquitto_publish(mosq, NULL, PUBLISH_TOPIC, strlen(buf), buf, 0, 1);
