@@ -38,6 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <mosquitto.h>
 #include <errno.h>
 #include <time.h>
+#include <string.h>
 
 /* To find your MQTT Username and Password
    login into your ZADATA account and click  navbar -> "Settings" -> "Credentials" */
@@ -48,19 +49,34 @@ POSSIBILITY OF SUCH DAMAGE.
 #define KEEPALIVE_IN_SECS 30
 
 /* here we subscribe to 2 topics (you may change them to your own topics */
+#define PUBLISH_TOPIC "hello_topic"
 char *TOPICS[] = {"/quotes_sim/data/exchange/NYSE/ticker/SPY/price",
-                  "/quotes_sim/data/exchange/NYSE/ticker/HPQ/price"};
+                  "/quotes_sim/data/exchange/NYSE/ticker/HPQ/price",
+                  PUBLISH_TOPIC};
 #define TOPIC_COUNT (sizeof(TOPICS) / sizeof(char*))
 
 void connect_callback(void *obj, int result) {
     struct mosquitto *mosq = obj;
 
     int i;
+    int rc;
+    char buf[512];
+    time_t rawtime;
+    struct tm tm;
     if (!result) {
         fprintf(stderr, "Connected successfuly to %s:%d\n", HOST, PORT);
         for (i = 0; i < TOPIC_COUNT; ++i) {
             fprintf(stderr, "Subscribing to %s\n", TOPICS[i]);
             mosquitto_subscribe(mosq, NULL, TOPICS[i], 0);
+        }
+        ctime(&rawtime);
+        sprintf(buf, "Hello world from C demo at %s", ctime(&rawtime));
+        fprintf(stderr, "Publishing to %s - %s\n", PUBLISH_TOPIC, buf);
+        rc = mosquitto_publish(mosq, NULL, PUBLISH_TOPIC, strlen(buf), buf, 0, 1);
+        if (rc) {
+            fprintf(stderr, "Error: publish returned %d, disconnecting.\n", rc);
+            mosquitto_disconnect(mosq);
+            return;
         }
     } else {
         switch(result){
