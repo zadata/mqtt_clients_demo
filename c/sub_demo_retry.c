@@ -41,25 +41,19 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <stdlib.h>
 
-#ifdef __WIN32 // also captures win64
-#include <windows.h>
-#else
-void Sleep(long long ms) {
-    long long ns = ms * 1000000LL;
-    struct timespec ts = {ns / 1000000000, ns % 1000000000};
-    struct timespec rem;
-    while (nanosleep(&ts, NULL) == -1)
-        rem = ts;
-}
-#endif
-
 /* To find your MQTT Username and Password
    login into your ZADATA account and click  navbar -> "Settings" -> "Credentials" */
 #define USERNAME    "YOUR-MQTT-USER"
-#define PASSWORD    "YOUR-MQTT-SUBSCRIBER-PWD"
+#define PASSWORD    "YOUR-MQTT-PUBLISHER-PWD"
 #define HOST        "mqtt.zadata.com"
 #define PORT        1883
-#define KEEPALIVE_IN_SECS 30
+#define KEEPALIVE_IN_SECS 25
+
+// see http://googleappsdeveloper.blogspot.co.il/2011/12/documents-list-api-best-practices.html
+#define BACKOFF_RESET_IN_SECS 60      // after this amount of time passes successfuly between backoffs, backoff is reset
+#define BACKOFF_LIMIT_IN_SECS 60      // maximal backoff delay
+#define BACKOFF_INITIAL_IN_SECS 1     // initial backoff delay 
+#define BACKOFF_MAX_RANDOM_IN_MS 2500 // added randomized delay is between 0 and this value
 
 /* here we subscribe to 2 topics (you may change them to your own topics */
 #define PUBLISH_TOPIC "hello_topic"
@@ -69,12 +63,6 @@ char *TOPICS[] = {"/quotes_sim/data/exchange/NYSE/ticker/SPY/price",
 #define TOPIC_COUNT (sizeof(TOPICS) / sizeof(char*))
 
 bool force_retry = false;
-
-// see http://googleappsdeveloper.blogspot.co.il/2011/12/documents-list-api-best-practices.html
-#define BACKOFF_RESET_IN_SECS 60      // after this amount of time passes successfuly between backoffs, backoff is reset
-#define BACKOFF_LIMIT_IN_SECS 60      // maximal backoff delay
-#define BACKOFF_INITIAL_IN_SECS 1     // initial backoff delay 
-#define BACKOFF_MAX_RANDOM_IN_MS 2500 // added randomized delay is between 0 and this value
 
 struct backoff {
     time_t last_fail_time;          // last time when backoff function was finished
@@ -87,6 +75,18 @@ struct backoff init_backoff() {
     ret.backoff_secs = BACKOFF_INITIAL_IN_SECS;
     return ret;
 };
+
+#ifdef __WIN32 // also captures win64
+#include <windows.h>
+#else
+void Sleep(long long ms) {
+    long long ns = ms * 1000000LL;
+    struct timespec ts = {ns / 1000000000, ns % 1000000000};
+    struct timespec rem;
+    while (nanosleep(&ts, NULL) == -1)
+        rem = ts;
+}
+#endif
 
 void connect_callback(void *obj, int result) {
     struct mosquitto *mosq = obj;
@@ -223,4 +223,3 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
-
