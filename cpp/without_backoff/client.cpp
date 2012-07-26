@@ -24,6 +24,11 @@ void Client::on_connect(int rc) {
         for (int i = 0; i < Constants::topic_count; ++i) {
             std::cerr << "Subscribing to " << Constants::topics[i] << "\n";
             subscribe(NULL, Constants::topics[i], 0);
+            if (rc) {
+                std::cerr << "Error: failed to subscribe to " << Constants::topics[i] << ", subscribe returned " << rc << "\n";
+                disconnect();
+                exit(rc);
+            }
         }
         time_t rawtime;
         time(&rawtime);
