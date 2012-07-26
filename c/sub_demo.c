@@ -62,7 +62,6 @@ void connect_callback(void *obj, int result) {
     int rc;
     char buf[512];
     time_t rawtime;
-    struct tm tm;
     if (!result) {
         fprintf(stderr, "Connected successfuly to %s:%d\n", HOST, PORT);
         for (i = 0; i < TOPIC_COUNT; ++i) {
