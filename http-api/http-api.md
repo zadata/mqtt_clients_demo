@@ -56,8 +56,10 @@ Common HTTP agruments (all optional):
 
 ##Examples:
 
+
+Get retained value on topic "a/b/c":
+
 ```
-# get retained value on topic "a/b/c"
 curl --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 # or
 curl --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc
@@ -99,6 +101,7 @@ curl -X POST --user USER:PWD http://api.zadata.com/v1/value?_method=DELETE&topic
 ##Example of publish / set retained value
 
 PUT /v1/value/SOME/LONG/TOPIC
+
 PUT /v1/value?topic=URL-ENCODED-TOPIC
 
 Published message is in HTTP request body and can be text or binary.
@@ -139,6 +142,7 @@ HTTP Response status codes:
 ##Example of get retained value
 
 GET /v1/value/SOME/LONG/TOPIC
+
 GET /v1/value?topic=URL-ENCODED-TOPIC
 
 
