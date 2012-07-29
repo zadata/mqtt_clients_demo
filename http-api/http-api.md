@@ -94,14 +94,14 @@ PUT /v1/value - HTTP params:
 
 ```
 # set/publish new retain value to topic a/b/c
-curl -X PUT --user USER:PWD https://api.zadata.com/v1/value/a/b/c?retain=0|1&qos=0|1|2 --data-binary "Hello World"
+curl -X PUT --user USER:PWD http://api.zadata.com/v1/value/a/b/c?retain=0|1&qos=0|1|2 --data-binary "Hello World"
 # or
-curl -X POST --user USER:PWD https://api.zadata.com/v1/value/a/b/c?_method=PUT --data-binary "Hello World"
+curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c?_method=PUT --data-binary "Hello World"
 
 #or
 
 # set/publish new retain value to topic a/b/c
-curl -X PUT --user USER:PWD https://api.zadata.com/v1/value?topic=a%2Fb%2Fc&retain=0|1&qos=0|1|2 --data-binary "Hello World"
+curl -X PUT --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc&retain=0|1&qos=0|1|2 --data-binary "Hello World"
 # or
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc&_method=PUT --data-binary "Hello World"
 ```
