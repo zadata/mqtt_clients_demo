@@ -1,11 +1,17 @@
-Author: Zvi Avraham <zvi-AT-zadata-DOT-com>
+Author: Zvi Avraham, zvi-AT-zadata-DOT-com
 
 Copyright (C) 2012 ZADATA Ltd
+
 
 ZADATA HTTP API
 ===============
 
 This API allows CRUD operations on topic values.
+
+
+Endpoint
+========
+
 The endpoint is: 
 
 http://api.zadata.com/v1/value
@@ -25,8 +31,8 @@ To find your MQTT Username and Password.
 Login into your ZADATA account and click  navbar -> "Settings" -> "Credentials".
 
 
-Common Parameters (optional):
-=============================
+Common Parameters:
+==================
 
 Common HTTP agruments (all optional):
 - `verbose`: 0|1 - boolean (default is 0). If verbose=1, HTTP response body will contain text with error message (in case of error).
@@ -42,6 +48,7 @@ Common HTTP Status codes:
 ```
 200 OK - message is in response body
 202 Accepted - message is accepted by server
+404 Not Found - in case if there are no retain value for specified topic
 429 Too Many Requests (RFC 6585) - message is throttled by server, need to publish again later
 412 Precondition failed - invalid request. Use verbose=1 in order to get detailed error
 413 Request Entity Too Large  -  message is too big (according to parameter)
@@ -142,6 +149,7 @@ HTTP Return status:
 
 ```
 200 OK - return retained message in HTTP response body
+404 Not Found - in case if there are no retain value for this topic 
 429 Too Many Requests (RFC 6585) - request is throttled by server
 412 Precondition failed - invalid request. Use verbose=1 in order to get detailed error
 401 Unauthorized - invalid username/password
