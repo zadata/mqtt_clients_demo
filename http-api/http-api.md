@@ -1,4 +1,4 @@
-Author: Zvi Avraham, zvi-AT-zadata-DOT-com
+Author: Zvi Avraham (zvi-AT-zadata-DOT-com)
 
 Copyright (C) 2012 ZADATA Ltd
 
@@ -9,8 +9,7 @@ ZADATA HTTP API
 This API allows CRUD operations on topic values.
 
 
-Endpoint
-========
+##Endpoint
 
 The endpoint is: 
 
@@ -21,8 +20,7 @@ Currently only http supported, but soon the default will be https (SSL), i.e.:
 https://api.zadata.com/v1/value (NOT IMPLEMENTED YET)
 
 
-Authentication
-==============
+##Authentication
 
 The authentication used is HTTP Basic Auth (i.e. username and password, same as in MQTT).
 The username and password is transmitted in clear text, so https must be used when on non-trusted networks.
@@ -31,8 +29,7 @@ To find your MQTT Username and Password.
 Login into your ZADATA account and click  navbar -> "Settings" -> "Credentials".
 
 
-Common Parameters:
-==================
+##Common Parameters:
 
 Common HTTP agruments (all optional):
 - `verbose`: 0|1 - boolean (default is 0). If verbose=1, HTTP response body will contain text with error message (in case of error).
@@ -42,8 +39,7 @@ Common HTTP agruments (all optional):
 - `topic` - URL-encoded topic name (optiopnal, in case topic is not specified as part of URL path).
 
 
-Common HTTP Status codes:
-=========================
+##Common HTTP Status codes:
 
 ```
 200 OK - message is in response body
@@ -58,50 +54,56 @@ Common HTTP Status codes:
 ```
 
 
-Examples:
-=========
+##Examples:
 
 ```
 # get retained value on topic "a/b/c"
 curl --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 # or
-curl --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc
+curl --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc
 ```
 
+Publish / set new retain value "Hello, World" to topic "a/b/c":
+
 ```
-# set/publish new retain value "Hello, World" to topic "a/b/c"
 curl -X PUT --user USER:PWD http://api.zadata.com/v1/value/a/b/c --data-binary "Hello, World"
 # or
-curl -X PUT --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc --data-binary "Hello, World"
+curl -X PUT --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc --data-binary "Hello, World"
 # or
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c?_method=PUT --data-binary "Hello, World"
 # or
-curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc&_method=PUT --data-binary "Hello, World"
+curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc&_method=PUT --data-binary "Hello, World"
 ```
 
+Update retain value on topic "a/b/c":
+
 ```
-# update retain value on topic "a/b/c"
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c --data-binary "Hello, World 2"
 # or
-curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc --data-binary "Hello, World 2"
+curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc --data-binary "Hello, World 2"
 ```
 
+Delete retain value on topic "a/b/c" (same as PUT-ing empty message):
+
 ```
-# delete retain value on topic "a/b/c" (same as PUT-ing empty message)
 curl -X DELETE --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 # or
-curl -X DELETE --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc
+curl -X DELETE --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc
 # or
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c?_method=DELETE
 # or
-curl -X POST --user USER:PWD http://api.zadata.com/v1/value?_method=DELETE&topic=%2Fa%2Fb%2Fc
+curl -X POST --user USER:PWD http://api.zadata.com/v1/value?_method=DELETE&topic=a%2Fb%2Fc
 ```
 
 
-Example of publish / set retained value
-=======================================
+##Example of publish / set retained value
 
-PUT /v1/value - HTTP params:
+PUT /v1/value/SOME/LONG/TOPIC
+PUT /v1/value?topic=URL-ENCODED-TOPIC
+
+Published message is in HTTP request body and can be text or binary.
+
+HTTP params:
 - `retain`: 0|1 - boolean(default is 1)
 - `qos`:  0|1|2 - only QoS=0 is implemented (default is 0)
 
@@ -134,8 +136,11 @@ HTTP Response status codes:
 ```
 
 
-Example of get retained value
-=============================
+##Example of get retained value
+
+GET /v1/value/SOME/LONG/TOPIC
+GET /v1/value?topic=URL-ENCODED-TOPIC
+
 
 ```
 curl --user USER:PWD http://api.zadata.com/v1/value/a/b/c
