@@ -59,7 +59,9 @@ Examples:
 curl --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 # or
 curl --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc
+```
 
+```
 # set/publish new retain value "Hello, World" to topic "a/b/c"
 curl -X PUT --user USER:PWD http://api.zadata.com/v1/value/a/b/c --data-binary "Hello, World"
 # or
@@ -68,12 +70,16 @@ curl -X PUT --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc --
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c?_method=PUT --data-binary "Hello, World"
 # or
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc&_method=PUT --data-binary "Hello, World"
+```
 
+```
 # update retain value on topic "a/b/c"
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value/a/b/c --data-binary "Hello, World 2"
 # or
 curl -X POST --user USER:PWD http://api.zadata.com/v1/value?topic=%2Fa%2Fb%2Fc --data-binary "Hello, World 2"
+```
 
+```
 # delete retain value on topic "a/b/c" (same as PUT-ing empty message)
 curl -X DELETE --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 # or
@@ -135,12 +141,10 @@ Return retained message as HTTP body
 HTTP Return status:
 
 ```
-200 OK - return retained message
-429 Too Many Requests (RFC 6585) - message is throttled by server
+200 OK - return retained message in HTTP response body
+429 Too Many Requests (RFC 6585) - request is throttled by server
 412 Precondition failed - invalid request. Use verbose=1 in order to get detailed error
 401 Unauthorized - invalid username/password
 403 Forbidden - username/password are valid, but doesn't provide permission (i.e. using subscribe password for publish or publishing/subscribing to somebody else's topic)
 500 Internal Server Error
 ```
-
-
