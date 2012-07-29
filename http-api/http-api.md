@@ -50,6 +50,7 @@ Common HTTP agruments (all optional):
 413 Request Entity Too Large  -  message is too big (according to parameter)
 401 Unauthorized - invalid username/password
 403 Forbidden - username/password are valid, but doesn't provide permission (i.e. using subscribe password for publish or publishing/subscribing to somebody else's topic)
+405 Method Not Allowed - A request was made of a resource using a request method not supported by that resource
 500 Internal Server Error
 ```
 
@@ -135,6 +136,7 @@ HTTP Response status codes:
 413 Request Entity Too Large  -  message is too big (according to parameter)
 401 Unauthorized - invalid username/password
 403 Forbidden - username/password are valid, but doesn't provide permission (i.e. using subscribe password for publish or publishing/subscribing to somebody else's topic)
+405 Method Not Allowed - A request was made of a resource using a request method not supported by that resource
 500 Internal Server Error
 ```
 
@@ -164,5 +166,6 @@ HTTP Response status codes:
 412 Precondition failed - invalid request. Use verbose=1 in order to get detailed error
 401 Unauthorized - invalid username/password
 403 Forbidden - username/password are valid, but doesn't provide permission (i.e. using subscribe password for publish or publishing/subscribing to somebody else's topic)
+405 Method Not Allowed - A request was made of a resource using a request method not supported by that resource
 500 Internal Server Error
 ```
