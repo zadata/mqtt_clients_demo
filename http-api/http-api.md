@@ -152,9 +152,10 @@ curl --user USER:PWD http://api.zadata.com/v1/value/a/b/c
 curl --user USER:PWD http://api.zadata.com/v1/value?topic=a%2Fb%2Fc&
 ```
 
-Return retained message as HTTP body
+In case of HTTP status 200 - the message will be in HTTP response body.
+If topic or retained value not found - the HTTP response status code will be 404.
 
-HTTP Return status:
+HTTP Response status codes:
 
 ```
 200 OK - return retained message in HTTP response body
