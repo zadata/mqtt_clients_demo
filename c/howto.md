@@ -1,4 +1,4 @@
-Installl needed packages
+Install needed packages
 
 ```
 sudo apt-get update
