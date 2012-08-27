@@ -10,7 +10,7 @@
 #   https://github.com/njh/ruby-mqtt
 #
 # Author: Zvi Avraham <zvi-AT-zadata-DOT-com>
-# Copyright (C) 2012 ZADATA Ltd
+# Copyright (C) 2012 ZADATA Ltd. All Rights Reserved.
 ################################################################################
 
 require 'rubygems'
