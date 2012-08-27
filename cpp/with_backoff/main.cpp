@@ -3,7 +3,7 @@
  *
  * for how to run instructions see howto.md
  *
- * copyright 2012 Nivertech (Nywhere Tech Ltd)
+ * Copyright (C) 2012 ZADATA Ltd. All Rights Reserved.
  */
 
 #include "backoff.h"
