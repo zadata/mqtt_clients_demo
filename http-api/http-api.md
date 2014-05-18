@@ -1,6 +1,6 @@
 Author: Zvi Avraham (zvi-AT-zadata-DOT-com)
 
-Copyright (C) 2012 ZADATA Ltd. All Rights Reserved.
+Copyright (C) 2012-2014 ZADATA Ltd. All Rights Reserved.
 
 
 ZADATA HTTP API
