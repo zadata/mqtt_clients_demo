@@ -18,14 +18,14 @@ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib' >> ~/.bashrc # or 
 
 Compile sub_cpp_demo
 
-```
+``` bash
 cd ~/sub_cpp_demo_dir
 g++ *.cpp -I/usr/local/include/ -L/usr/local/lib -lmosquittopp -o sub_cpp_demo -Wall -pedantic
 ```
 
 Run sub_demo
 
-```
+``` bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib  # you may also add this to .profile
 
 ./sub_cpp_demo
