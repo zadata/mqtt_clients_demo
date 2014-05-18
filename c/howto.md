@@ -1,5 +1,5 @@
 
-Download and install mosquitto v1.3.1, we'll be using it's libmosquitto C library
+Download and install mosquitto v1.3.1. We'll be using it's libmosquitto C library
 
 ``` bash
 sudo apt-get update
